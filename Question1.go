@@ -8,10 +8,6 @@ import(
  	"bufio" // For input/output (https://golang.org/pkg/bufio/)
  	"rand" // For our RNG (https://golang.org/pkg/math/rand/)
 )
-	
-
- func main()
- {
 		// Function that takes a single string as an input
 		// and returns a random string from an array
 		func ElizaResponse() string
@@ -30,16 +26,19 @@ import(
 			fmt.println("Please enter a sentence: ");
 
 			// Create new reader so we can read strings
-			reader := bufio.NewReader(os.Stdin) 
-			userInput, _ := reader.ReadString('\n')
+			reader := bufio.NewReader(os.Stdin);
+			userInput, _ := reader.ReadString('\n');
 
 			// Set a seed for our RNG using time in nano seconds
 			randomNumber = rand.Seed(time.Now().UnixNano());
 
 			// Return one of the 3 strings held in our string array, chosen at random
-			fmt.Println("Eliza says:", answers[randomNumber(len(outputArray))])
+			return answers[randomNumber(len(outputArray))];
 
 			
 		}
+ func main()
+ {
+
  }
 
