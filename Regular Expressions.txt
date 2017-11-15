@@ -1,0 +1,11 @@
+^([0-9\.]+),([0-9]+)$
+
+
+^ = start of a line
+[] = any digit "OR"
+\. = a dot character
++ = One or more
+$ = end of line
+, = actually a comma
+$2 = second thing that was captured with brackets
+$1 = first thing that was captured with brackets
