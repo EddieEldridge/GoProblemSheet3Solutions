@@ -5,16 +5,17 @@ package main
 
 import(
 	"fmt" // For taking in user input (https://golang.org/pkg/fmt/)
- 	"bufio" // For input/output (https://golang.org/pkg/bufio/)
+ 	//"bufio" // For input/output (https://golang.org/pkg/bufio/)
  	"math/rand" // For our RNG (https://golang.org/pkg/math/rand/)
 	"time" // For our rng (https://golang.org/pkg/time/)
-	"os" // For our reader
+	//"os" // For our reader
 )
 		// Function that takes a single string as an input
 		// and returns a random string from an array
 		func ElizaResponse() string{
 			// Variables
 			var outputArray [3]string
+			var userInput string
 
 			// Initlize our array
 			outputArray[0]="I’m not sure what you’re trying to say. Could you explain it to me?"
@@ -23,10 +24,8 @@ import(
 
 			// Prompt user for input
 			// Create new reader so we can read strings
-			reader := bufio.NewReader(os.Stdin)
-			fmt.Print("Please enter a sentence: ")
-			userInput, _ := reader.ReadString('\n')
-			fmt.Println(userInput)
+			fmt.Println("Please enter a sentence: ")
+			fmt.Scanf("%s", &userInput)
 
 			// Set a seed for our RNG using time in nano seconds
 			rand.Seed(time.Now().UnixNano())
@@ -36,6 +35,6 @@ import(
 			
 		}
  func main() {
-
+	ElizaResponse();
  }
 
