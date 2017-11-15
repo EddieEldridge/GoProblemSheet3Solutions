@@ -43,8 +43,11 @@ func ElizaResponse() string {
 	fmt.Println("Please enter a sentence: ")
 	fmt.Scanf("%s", &userInput)
 
-	//Pur the random string in our array ibto a variable called randomString
+	//Put the random string in our array into a variable called randomString
 	outputArray[randomNumber] = randomString
+
+	// Print our results
+	fmt.Printf("%s", randomString)
 
 	// Return the randomString
 	return randomString
@@ -52,5 +55,4 @@ func ElizaResponse() string {
 
 func main() {
 	ElizaResponse()
-	fmt.Println(randomString)
 }
