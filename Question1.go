@@ -6,39 +6,36 @@ package main
 import(
 	"fmt" // For taking in user input (https://golang.org/pkg/fmt/)
  	"bufio" // For input/output (https://golang.org/pkg/bufio/)
- 	"rand" // For our RNG (https://golang.org/pkg/math/rand/)
+ 	"math/rand" // For our RNG (https://golang.org/pkg/math/rand/)
+	"time" // For our rng (https://golang.org/pkg/time/)
+	"os" // For our reader
 )
 		// Function that takes a single string as an input
 		// and returns a random string from an array
-		func ElizaResponse() string
-		{
+		func ElizaResponse() string{
 			// Variables
-			var userInput string; 
-			var outputArray [3]string;
-			var randomNumber int;
+			var outputArray [3]string
 
 			// Initlize our array
-			outputArray[0]="I’m not sure what you’re trying to say. Could you explain it to me?";
-			outputArray[1]="How does that make you feel?";
-			outputArray[2]="Why do you say that?";
+			outputArray[0]="I’m not sure what you’re trying to say. Could you explain it to me?"
+			outputArray[1]="How does that make you feel?"
+			outputArray[2]="Why do you say that?"
 
 			// Prompt user for input
-			fmt.println("Please enter a sentence: ");
-
 			// Create new reader so we can read strings
-			reader := bufio.NewReader(os.Stdin);
-			userInput, _ := reader.ReadString('\n');
+			reader := bufio.NewReader(os.Stdin)
+			fmt.Print("Please enter a sentence: ")
+			userInput, _ := reader.ReadString('\n')
+			fmt.Println(userInput)
 
 			// Set a seed for our RNG using time in nano seconds
-			randomNumber = rand.Seed(time.Now().UnixNano());
+			rand.Seed(time.Now().UnixNano())
 
 			// Return one of the 3 strings held in our string array, chosen at random
-			return answers[randomNumber(len(outputArray))];
-
+			return outputArray[rand.Intn(3)]
 			
 		}
- func main()
- {
+ func main() {
 
  }
 
