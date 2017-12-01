@@ -47,8 +47,13 @@ func ElizaResponse() string {
 	userInput, _ := reader.ReadString('\n')
 
 	// Test user input
+	fmt.Println()
+	fmt.Println("User Input:" + userInput)
+
+	// Return random answer from outputArray
+	fmt.Println("Random Output: " + outputArray[rand.Intn(len(outputArray))])
 	// Return the randomString
-	return outputArray[rand.Intn(len(outputArray))]
+	return userInput
 }
 
 func main() {
