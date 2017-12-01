@@ -8,6 +8,7 @@ import (
 	"fmt"
 	"math/rand" // For taking in user input (https://golang.org/pkg/fmt/)
 	"regexp"
+	"strings"
 	// For our RNG (https://golang.org/pkg/math/rand/)
 	"os"
 	"time" // For our rng (https://golang.org/pkg/time/)
@@ -32,13 +33,14 @@ func ElizaResponse() string {
 
 	// Initlize an array of strings that will be randomly chosen
 	outputArray := []string{
-		"I'm npot sure what you're trying to say, could you explain it to me?",
+		"I'm not sure what you're trying to say, could you explain it to me?",
 		"How does that make you feel?",
 		"Why do you say that?",
 	}
 
 	// Set a variable to father so we can compare the userInput against it
 	father := regexp.MustCompile(`(?i)\bfather\b`)
+	iAmAMatch := regexp.MustCompile(`(?i)\bi am\b|\bI am\b|\bim\b|\bIm\b|\bI'm\b|\bi'm\b`)
 
 	//Put the random string in our array into a variable called randomString
 	//outputArray[randomNumber] = randomString
@@ -54,9 +56,54 @@ func ElizaResponse() string {
 	fmt.Println()
 	fmt.Println("User Input:" + userInput)
 
+	// If the userInput is any variation of the word father, enter the statement
 	if father.MatchString(userInput) {
-		fmt.Println("Matched")
+
+		// Print response
+		fmt.Println("Why don't you tell me more about your father?")
 	} else {
+
+		// If any variation of the words 'I am' match any of the userInput, enter the statement
+		if iAmAMatch.MatchString(userInput) {
+
+			// If the userInput contain's 'your', enter the statement
+			if strings.Contains(strings.ToLower(userInput), "you're") {
+
+				// Create a variable called yourReplace that will be used to replace 'you're' with me
+				yourReplace := regexp.MustCompile(`you're`)
+
+				userInput = yourReplace.ReplaceAllString(userInput, "my")
+
+			}
+
+			// If the userInput contain's 'me', enter the statement
+			if strings.Contains(strings.ToLower(userInput), "me") {
+
+				// Create a variable called yourReplace that will be used to replace 'me' with me
+				meReplace := regexp.MustCompile(`me`)
+
+				userInput = meReplace.ReplaceAllString(userInput, "you")
+
+			}
+
+			// If the userInput contain's 'you', enter the statement
+			if strings.Contains(strings.ToLower(userInput), "you") {
+
+				// Create a variable called yourReplace that will be used to replace 'you' with me
+				youReplace := regexp.MustCompile(`you`)
+
+				userInput = youReplace.ReplaceAllString(userInput, "I")
+
+			}
+
+		} else {
+			// Replace userInput with "How do you are know you are"
+			replacer := iAmAMatch.ReplaceAllString(userInput, "How do you know you are")
+
+			// Print result
+			fmt.Println(replacer + "?")
+
+		}
 		// Return random answer from outputArray
 		fmt.Println("Random Output: " + outputArray[rand.Intn(len(outputArray))])
 	}
