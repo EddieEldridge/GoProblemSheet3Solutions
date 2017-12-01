@@ -7,6 +7,7 @@ import (
 	"bufio"
 	"fmt"
 	"math/rand" // For taking in user input (https://golang.org/pkg/fmt/)
+	"regexp"
 	// For our RNG (https://golang.org/pkg/math/rand/)
 	"os"
 	"time" // For our rng (https://golang.org/pkg/time/)
@@ -36,6 +37,9 @@ func ElizaResponse() string {
 		"Why do you say that?",
 	}
 
+	// Set a variable to father so we can compare the userInput against it
+	father := regexp.MustCompile(`(?i)\bfather\b`)
+
 	//Put the random string in our array into a variable called randomString
 	//outputArray[randomNumber] = randomString
 
@@ -50,8 +54,13 @@ func ElizaResponse() string {
 	fmt.Println()
 	fmt.Println("User Input:" + userInput)
 
-	// Return random answer from outputArray
-	fmt.Println("Random Output: " + outputArray[rand.Intn(len(outputArray))])
+	if father.MatchString(userInput) {
+		fmt.Println("Matched")
+	} else {
+		// Return random answer from outputArray
+		fmt.Println("Random Output: " + outputArray[rand.Intn(len(outputArray))])
+	}
+
 	// Return the randomString
 	return userInput
 }
